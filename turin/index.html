@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turin Transportes — Mobilidade Urbana com Excelência</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #0F172A;
+      --secondary: #334155;
+      --cta: #0369A1;
+      --cta-hover: #0284C7;
+      --bg: #F8FAFC;
+      --text: #020617;
+      --muted: #64748B;
+      --border: #E2E8F0;
+      --accent: #DBEAFE;
+      --white: #FFFFFF;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 16px; left: 16px; right: 16px;
+      z-index: 50;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      box-shadow: 0 4px 20px rgba(15,23,42,0.08);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 36px; height: 36px;
+      background: var(--cta);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .nav-logo-icon svg { width: 20px; height: 20px; fill: white; }
+
+    .nav-brand {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--primary);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--secondary);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cta); }
+
+    .nav-cta {
+      background: var(--cta);
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+      cursor: pointer;
+    }
+
+    .nav-cta:hover { background: var(--cta-hover) !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 140px 24px 100px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: var(--cta);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      border: 1px solid #BFDBFE;
+    }
+
+    .hero-badge svg { width: 14px; height: 14px; }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    h1 span { color: var(--cta); }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--cta);
+      color: white;
+      padding: 13px 26px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary:hover { background: var(--cta-hover); transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: var(--primary);
+      padding: 13px 26px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      border: 1.5px solid var(--border);
+      transition: border-color 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover { border-color: var(--cta); transform: translateY(-1px); }
+
+    /* HERO CARD */
+    .hero-card {
+      background: white;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 32px;
+      box-shadow: 0 8px 40px rgba(15,23,42,0.10);
+    }
+
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .hero-card-icon {
+      width: 46px; height: 46px;
+      background: var(--accent);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .hero-card-icon svg { width: 24px; height: 24px; stroke: var(--cta); fill: none; }
+
+    .hero-card-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .hero-card-subtitle { font-size: 13px; color: var(--muted); }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-item {
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .stat-value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+
+    .cert-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .cert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #F0FDF4;
+      color: #15803D;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: 1px solid #BBF7D0;
+    }
+
+    .cert-badge svg { width: 12px; height: 12px; }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      background: var(--primary);
+      padding: 48px 24px;
+    }
+
+    .stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .stats-item { text-align: center; }
+
+    .stats-number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 40px;
+      font-weight: 800;
+      color: white;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stats-label {
+      font-size: 13px;
+      color: #94A3B8;
+      font-weight: 500;
+    }
+
+    /* ─── SECTION ─── */
+    section {
+      padding: 90px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--cta);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 12px;
+      border: 1px solid #BFDBFE;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    /* ─── CIDADES GRID ─── */
+    .cidades-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .cidade-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+
+    .cidade-card:hover {
+      border-color: var(--cta);
+      box-shadow: 0 8px 30px rgba(3,105,161,0.12);
+      transform: translateY(-2px);
+    }
+
+    .cidade-icon {
+      width: 44px; height: 44px;
+      background: var(--accent);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .cidade-icon svg { width: 22px; height: 22px; stroke: var(--cta); fill: none; }
+
+    .cidade-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .cidade-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ─── FEATURES ─── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .feature-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--cta);
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+
+    .feature-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .feature-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    /* ─── CONTATO ─── */
+    .contact-section {
+      background: var(--primary);
+      padding: 90px 24px;
+    }
+
+    .contact-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-inner h2 { color: white; margin-bottom: 12px; }
+
+    .contact-inner p { color: #94A3B8; font-size: 16px; margin-bottom: 36px; line-height: 1.7; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .contact-item {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 20px 16px;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    .contact-item:hover { background: rgba(255,255,255,0.12); }
+
+    .contact-item-label { font-size: 11px; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+
+    .contact-item-value { font-size: 14px; color: white; font-weight: 500; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #020617;
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    footer p { font-size: 13px; color: #475569; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding-top: 100px; gap: 36px; }
+      .hero-card { display: none; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .cidades-grid, .features-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+    </div>
+    <span class="nav-brand">Turin Transportes</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#cidades">Cidades</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#contato" class="nav-cta">Fale Conosco</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+      ISO 9001 · Gerdau Excelência em Gestão
+    </div>
+    <h1>Mobilidade Urbana com <span>Excelência</span> e Confiança</h1>
+    <p class="hero-sub">Há mais de duas décadas conectando pessoas nas principais cidades de Minas Gerais. Segurança, pontualidade e compromisso com o passageiro.</p>
+    <div class="hero-actions">
+      <a href="#contato" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        Fale Conosco
+      </a>
+      <a href="#cidades" class="btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Nossas Cidades
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero-card-header">
+      <div class="hero-card-icon">
+        <svg viewBox="0 0 24 24" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </div>
+      <div>
+        <div class="hero-card-title">Painel Operacional</div>
+        <div class="hero-card-subtitle">Atualizado em tempo real</div>
+      </div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-item">
+        <div class="stat-value">500+</div>
+        <div class="stat-label">Colaboradores</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">4</div>
+        <div class="stat-label">Cidades Atendidas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">25+</div>
+        <div class="stat-label">Anos de Operação</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">98%</div>
+        <div class="stat-label">Índice Pontualidade</div>
+      </div>
+    </div>
+    <div class="cert-row">
+      <span class="cert-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        ISO 9001
+      </span>
+      <span class="cert-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Gerdau Excellence
+      </span>
+      <span class="cert-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Tarifa Zero
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stats-item">
+      <div class="stats-number">500+</div>
+      <div class="stats-label">Colaboradores</div>
+    </div>
+    <div class="stats-item">
+      <div class="stats-number">4</div>
+      <div class="stats-label">Municípios Atendidos</div>
+    </div>
+    <div class="stats-item">
+      <div class="stats-number">25+</div>
+      <div class="stats-label">Anos de Excelência</div>
+    </div>
+    <div class="stats-item">
+      <div class="stats-number">ISO</div>
+      <div class="stats-label">Certificação 9001</div>
+    </div>
+  </div>
+</div>
+
+<!-- CIDADES -->
+<section id="cidades">
+  <div class="section-tag">Presença Regional</div>
+  <h2>Onde Atuamos</h2>
+  <p class="section-sub">Operamos sistemas de transporte público em quatro cidades da Região Central de Minas Gerais, com foco em mobilidade urbana de qualidade.</p>
+  <div class="cidades-grid">
+    <div class="cidade-card">
+      <div class="cidade-icon">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+      </div>
+      <div class="cidade-name">Ouro Branco</div>
+      <div class="cidade-desc">Sistema Tarifa Zero — mobilidade gratuita para toda a população. Operação integrada com a Prefeitura Municipal.</div>
+    </div>
+    <div class="cidade-card">
+      <div class="cidade-icon">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      </div>
+      <div class="cidade-name">Congonhas</div>
+      <div class="cidade-desc">Operação com mais de 25 anos de história na cidade. Referência em transporte público municipal no Vale do Aço.</div>
+    </div>
+    <div class="cidade-card">
+      <div class="cidade-icon">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <div class="cidade-name">Ouro Preto</div>
+      <div class="cidade-desc">Membro do Consórcio Rota Real — operação integrada em cidade histórica e Patrimônio Mundial da Humanidade.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos" style="padding-top: 0;">
+  <div class="section-tag">O que Oferecemos</div>
+  <h2>Nossos Serviços</h2>
+  <p class="section-sub">Soluções completas de mobilidade urbana com foco em qualidade, segurança e conformidade regulatória.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-num">01 — OPERAÇÃO</div>
+      <div class="feature-title">Transporte Urbano Regular</div>
+      <div class="feature-desc">Linhas urbanas e distritais com frota moderna, monitoramento em tempo real e gestão integrada de horários.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">02 — PROGRAMA</div>
+      <div class="feature-title">Tarifa Zero</div>
+      <div class="feature-desc">Implementação e operação de sistemas de transporte público gratuito em parceria com municípios, com controle rigoroso de subsídios.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">03 — GESTÃO</div>
+      <div class="feature-title">Consórcios Intermunicipais</div>
+      <div class="feature-desc">Participação em consórcios de transporte regional, como o Consórcio Rota Real em Ouro Preto e Conselheiro Lafaiete.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">04 — QUALIDADE</div>
+      <div class="feature-title">Certificação ISO 9001</div>
+      <div class="feature-desc">Processos certificados e auditados para garantir a excelência na prestação de serviços de transporte público.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">05 — TECNOLOGIA</div>
+      <div class="feature-title">Inteligência Operacional</div>
+      <div class="feature-desc">Sistemas digitais de gestão, monitoramento de frota e indicadores de desempenho para tomada de decisão ágil.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">06 — PESSOAS</div>
+      <div class="feature-title">Equipe Especializada</div>
+      <div class="feature-desc">Mais de 500 colaboradores qualificados, com programas contínuos de treinamento e desenvolvimento profissional.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<div class="contact-section" id="contato">
+  <div class="contact-inner">
+    <div class="section-tag" style="background: rgba(219,234,254,0.15); color: #93C5FD; border-color: rgba(147,197,253,0.3);">Fale Conosco</div>
+    <h2>Vamos Conversar</h2>
+    <p>Entre em contato com nossa equipe para parcerias, fornecedores ou informações sobre nossas operações.</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-item-label">E-mail</div>
+        <div class="contact-item-value">contato@turintransportes.com.br</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">Sede</div>
+        <div class="contact-item-value">Ouro Preto / MG</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">Administrativo</div>
+        <div class="contact-item-value">administrativo@turin<br>transportes.com.br</div>
+      </div>
+    </div>
+    <a href="mailto:contato@turintransportes.com.br" class="btn-primary" style="justify-content: center;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      Enviar Mensagem
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Turin Transportes. Todos os direitos reservados. · CNPJ 03.308.232/0001-08</p>
+</footer>
+
+</body>
+</html>
