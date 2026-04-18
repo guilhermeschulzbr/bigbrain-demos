@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pesquisa de satisfação do transporte público de Ouro Preto — Consórcio Rota Real" />
+  <title>Pesquisa — Consórcio Rota Real</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* ── Reset & Base ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:    #1e4fc0;
+      --blue-dk: #163a9a;
+      --blue-lt: #e8eefb;
+      --gold:    #9a7e1a;
+      --gold-lt: #f5f0e0;
+      --white:   #ffffff;
+      --off:     #f9f8f5;
+      --text:    #1a1a2e;
+      --muted:   #4a4a6a;
+      --border:  #d4c8a0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--off);
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── Header ──────────────────────────────────── */
+    header {
+      background: var(--blue);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 2px 12px rgba(30,79,192,0.25);
+    }
+
+    .logo-mark {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      color: var(--white);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .logo-text span {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 2px;
+    }
+
+    .logo-text strong {
+      display: block;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+
+    /* ── Hero ────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(160deg, var(--blue) 0%, #0e2a80 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 64px 24px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-crown {
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 8vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 4vw, 1.15rem);
+      color: rgba(255,255,255,0.85);
+      max-width: 480px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 18px 40px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      min-height: 56px;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background: #7d6614;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    /* ── Bus Visual ──────────────────────────────── */
+    .bus-section {
+      background: var(--white);
+      padding: 48px 24px;
+      text-align: center;
+      border-top: 3px solid var(--gold);
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .bus-visual {
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto 24px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(30,79,192,0.15);
+      border: 2px solid var(--border);
+    }
+
+    .bus-visual img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .bus-placeholder {
+      background: linear-gradient(135deg, var(--blue-lt) 0%, #dde8ff 100%);
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .bus-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    .bus-tagline {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    /* ── Why Section ──────────────────────────────── */
+    .why-section {
+      background: var(--off);
+      padding: 56px 24px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 6vw, 2.2rem);
+      font-weight: 700;
+      color: var(--blue);
+      text-align: center;
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .section-divider {
+      width: 64px;
+      height: 3px;
+      background: var(--gold);
+      margin: 12px auto 40px;
+      border-radius: 2px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 640px) {
+      .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 860px;
+      }
+    }
+
+    .card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(30,79,192,0.07);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: default;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(30,79,192,0.13);
+    }
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--blue-lt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+
+    .card-text {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Steps Section ───────────────────────────── */
+    .steps-section {
+      background: var(--blue-lt);
+      padding: 56px 24px;
+      border-top: 2px solid rgba(30,79,192,0.12);
+    }
+
+    .steps-list {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 20px 22px;
+      border: 1.5px solid var(--border);
+      box-shadow: 0 2px 8px rgba(30,79,192,0.06);
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: var(--white);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-text {
+      font-size: 1rem;
+      color: var(--text);
+      padding-top: 8px;
+      line-height: 1.5;
+    }
+
+    .step-text strong {
+      display: block;
+      color: var(--blue);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    /* ── CTA Section ─────────────────────────────── */
+    .cta-section {
+      background: linear-gradient(160deg, #0e2a80 0%, var(--blue) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 64px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 7vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: 0.01em;
+    }
+
+    .cta-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 36px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 20px 48px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      min-height: 60px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+      transition: background 0.2s ease, transform 0.15s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-cta:hover {
+      background: #7d6614;
+      transform: translateY(-2px);
+    }
+
+    .cta-note {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Footer ──────────────────────────────────── */
+    footer {
+      background: #0d1f5c;
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 28px 24px;
+      font-size: 0.85rem;
+      line-height: 1.8;
+    }
+
+    footer strong {
+      color: rgba(255,255,255,0.9);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+    }
+
+    /* ── Accessibility ───────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+
+    /* ── Invisible at start (GSAP) ───────────────── */
+    .gsap-hidden { opacity: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Crown -->
+      <path d="M8 32L14 16L20 24L24 14L28 24L34 16L40 32H8Z" fill="#9a7e1a"/>
+      <rect x="8" y="32" width="32" height="5" rx="2" fill="#9a7e1a"/>
+      <!-- RR letters -->
+      <text x="13" y="47" font-family="Georgia,serif" font-size="16" font-weight="bold" fill="white">RR</text>
+    </svg>
+    <div class="logo-text" aria-label="Consórcio Rota Real">
+      <span>Consórcio</span>
+      <strong>Rota Real</strong>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-crown gsap-hidden" id="hero-crown">
+      <svg width="64" height="40" viewBox="0 0 64 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M4 36L14 10L24 22L32 6L40 22L50 10L60 36H4Z" fill="#9a7e1a" opacity="0.9"/>
+        <rect x="4" y="36" width="56" height="4" rx="2" fill="#9a7e1a" opacity="0.7"/>
+        <circle cx="4" cy="10" r="4" fill="#c9a820"/>
+        <circle cx="32" cy="6" r="4" fill="#c9a820"/>
+        <circle cx="60" cy="10" r="4" fill="#c9a820"/>
+      </svg>
+    </div>
+
+    <h1 class="hero-title gsap-hidden" id="hero-title">
+      Nos ajude a melhorar<br/>o transporte de Ouro Preto
+    </h1>
+    <p class="hero-sub gsap-hidden">
+      Responda uma pesquisa rápida e concorra a prêmios.<br/>
+      São só 2 minutos do seu tempo.
+    </p>
+    <a href="http://129.121.39.0:3457/coleta/08370c05bf9b621a92af8e26"
+       class="btn-primary gsap-hidden"
+       id="hero-btn"
+       aria-label="Responder à pesquisa agora">
+      Quero responder agora
+    </a>
+  </section>
+
+  <!-- BUS VISUAL -->
+  <section class="bus-section">
+    <div class="bus-visual gsap-hidden" id="bus-img">
+      <!-- Replace src with real photo path after deploy -->
+      <div class="bus-placeholder" role="img" aria-label="Ônibus do Consórcio Rota Real">
+        <svg width="100" height="60" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="5" y="15" width="90" height="35" rx="6" fill="#1e4fc0" opacity="0.15"/>
+          <rect x="5" y="15" width="90" height="35" rx="6" stroke="#1e4fc0" stroke-width="2"/>
+          <rect x="12" y="20" width="15" height="12" rx="2" fill="#1e4fc0" opacity="0.5"/>
+          <rect x="32" y="20" width="15" height="12" rx="2" fill="#1e4fc0" opacity="0.5"/>
+          <rect x="52" y="20" width="15" height="12" rx="2" fill="#1e4fc0" opacity="0.5"/>
+          <rect x="72" y="20" width="15" height="12" rx="2" fill="#1e4fc0" opacity="0.5"/>
+          <rect x="5" y="38" width="90" height="5" fill="#9a7e1a" opacity="0.4"/>
+          <circle cx="22" cy="54" r="6" fill="#1a1a2e" opacity="0.7"/>
+          <circle cx="22" cy="54" r="3" fill="#9a7e1a"/>
+          <circle cx="78" cy="54" r="6" fill="#1a1a2e" opacity="0.7"/>
+          <circle cx="78" cy="54" r="3" fill="#9a7e1a"/>
+          <text x="32" y="34" font-family="Georgia,serif" font-size="9" font-weight="bold" fill="#1e4fc0" opacity="0.7">Rota Real</text>
+        </svg>
+      </div>
+    </div>
+    <p class="bus-tagline">
+      O Consórcio Rota Real serve Ouro Preto e seus distritos.<br/>
+      Sua opinião faz o transporte melhorar de verdade.
+    </p>
+  </section>
+
+  <!-- POR QUE RESPONDER -->
+  <section class="why-section" aria-labelledby="why-title">
+    <h2 class="section-title" id="why-title">Por que responder?</h2>
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <div class="cards-grid">
+
+      <article class="card gsap-card" aria-labelledby="card1-title">
+        <div class="card-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1e4fc0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3 class="card-title" id="card1-title">Sua voz importa</h3>
+        <p class="card-text">
+          Suas respostas chegam direto a quem toma as decisões sobre as linhas de ônibus.
+        </p>
+      </article>
+
+      <article class="card gsap-card" aria-labelledby="card2-title">
+        <div class="card-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9a7e1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <div class="card-icon" style="background:var(--gold-lt);" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9a7e1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <h3 class="card-title" id="card2-title">Sorteio de prêmios</h3>
+        <p class="card-text">
+          Quem responde concorre a prêmios surpresa. Só precisar colocar seu nome e WhatsApp no final.
+        </p>
+      </article>
+
+      <article class="card gsap-card" aria-labelledby="card3-title">
+        <div class="card-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1e4fc0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <h3 class="card-title" id="card3-title">Transporte melhor</h3>
+        <p class="card-text">
+          Com suas respostas, podemos melhorar horários, itinerários e o conforto dos ônibus.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="steps-section" aria-labelledby="steps-title">
+    <h2 class="section-title" id="steps-title">Como funciona</h2>
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <ol class="steps-list" aria-label="Passos para responder a pesquisa">
+      <li class="step gsap-step">
+        <span class="step-num" aria-hidden="true">1</span>
+        <div class="step-text">
+          <strong>Clique no botão abaixo</strong>
+          Você vai ser levado para a pesquisa. É rápido e fácil.
+        </div>
+      </li>
+      <li class="step gsap-step">
+        <span class="step-num" aria-hidden="true">2</span>
+        <div class="step-text">
+          <strong>Responda as perguntas</strong>
+          São só 6 perguntas simples. Leva menos de 2 minutos.
+        </div>
+      </li>
+      <li class="step gsap-step">
+        <span class="step-num" aria-hidden="true">3</span>
+        <div class="step-text">
+          <strong>Coloque seu nome e WhatsApp</strong>
+          Opcional, mas necessário para concorrer ao sorteio de prêmios.
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-section" aria-labelledby="cta-title">
+    <h2 class="cta-title gsap-cta" id="cta-title">
+      Pronto para participar?
+    </h2>
+    <p class="cta-sub gsap-cta">
+      Ajude a melhorar o transporte de Ouro Preto.<br/>
+      Responda agora — são só 2 minutos.
+    </p>
+    <a href="http://129.121.39.0:3457/coleta/08370c05bf9b621a92af8e26"
+       class="btn-cta gsap-cta"
+       id="cta-btn"
+       aria-label="Acessar pesquisa de satisfação">
+      Responder a pesquisa
+    </a>
+    <p class="cta-note gsap-cta">
+      Gratuito · Anônimo · 2 minutos
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <strong>Consórcio Rota Real</strong><br/>
+    Transporte Público — Ouro Preto e Região<br/>
+    <span style="color:rgba(255,255,255,0.35);">© 2026 · Todos os direitos reservados</span>
+  </footer>
+
+  <!-- GSAP Animations -->
+  <script>
+    // Register ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Check reduced motion preference
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!prefersReduced) {
+
+      // ── Hero entrance (timeline) ─────────────────
+      const heroTl = gsap.timeline({ delay: 0.15 });
+      heroTl
+        .to('#hero-crown', {
+          opacity: 1, y: 0,
+          duration: 0.6, ease: 'power2.out'
+        })
+        .to('#hero-title', {
+          opacity: 1, y: 0,
+          duration: 0.65, ease: 'power2.out'
+        }, '-=0.3')
+        .to('.hero .hero-sub', {
+          opacity: 1, y: 0,
+          duration: 0.6, ease: 'power2.out'
+        }, '-=0.35')
+        .to('#hero-btn', {
+          opacity: 1, y: 0,
+          duration: 0.55, ease: 'back.out(1.2)'
+        }, '-=0.3');
+
+      // Set initial hidden states
+      gsap.set(['#hero-crown', '#hero-title', '.hero .hero-sub', '#hero-btn'], {
+        opacity: 0, y: 30
+      });
+
+      // ── Bus image ────────────────────────────────
+      gsap.fromTo('#bus-img',
+        { opacity: 0, scale: 0.92 },
+        {
+          opacity: 1, scale: 1,
+          duration: 0.7, ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '#bus-img',
+            start: 'top 80%',
+          }
+        }
+      );
+
+      // ── Cards stagger ────────────────────────────
+      gsap.fromTo('.gsap-card',
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1, y: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.cards-grid',
+            start: 'top 78%',
+          }
+        }
+      );
+
+      // ── Steps stagger ────────────────────────────
+      gsap.fromTo('.gsap-step',
+        { opacity: 0, x: -30 },
+        {
+          opacity: 1, x: 0,
+          duration: 0.55,
+          stagger: 0.12,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.steps-list',
+            start: 'top 80%',
+          }
+        }
+      );
+
+      // ── CTA section ──────────────────────────────
+      gsap.fromTo('.gsap-cta',
+        { opacity: 0, y: 25 },
+        {
+          opacity: 1, y: 0,
+          duration: 0.55,
+          stagger: 0.12,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.cta-section',
+            start: 'top 80%',
+          }
+        }
+      );
+
+      // ── CTA button pulse ─────────────────────────
+      gsap.to('#cta-btn', {
+        boxShadow: '0 0 0 12px rgba(154,126,26,0)',
+        repeat: -1,
+        duration: 1.6,
+        ease: 'power2.out',
+        yoyo: true,
+        delay: 1.5
+      });
+
+    } else {
+      // Reduced motion: just show everything
+      document.querySelectorAll('.gsap-hidden, .gsap-card, .gsap-step, .gsap-cta').forEach(el => {
+        el.style.opacity = '1';
+      });
+    }
+  </script>
+</body>
+</html>
